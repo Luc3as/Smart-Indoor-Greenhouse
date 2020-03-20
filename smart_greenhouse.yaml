@@ -1,0 +1,163 @@
+substitutions:
+  devicename: "smart_greenhouse"
+  upper_devicename: "Smart Greenhouse"
+
+esphome:
+  name: $devicename
+  platform: ESP32
+  board: esp-wrover-kit
+
+wifi:
+  ssid: "WiFi"
+  password: !secret LukiaMajka_WIFI_PASS
+  
+# Enable logging
+logger:
+#  level: WARN
+
+# Enable Home Assistant API
+api:
+  password: !secret esphome_api_pass
+
+ota:
+  password: !secret esphome_ota_pass
+
+time:
+  - platform: homeassistant
+  
+#esp32_ble_tracker:    
+#  scan_parameters:
+#    interval: 1520ms
+#    window: 320ms
+#    active: false
+
+text_sensor:
+  - platform: template
+    name: ${upper_devicename} uptime
+    lambda: |-
+      uint32_t dur = id(uptime_s).state;
+      int dys = 0;
+      int hrs = 0;
+      int mnts = 0;
+      if (dur > 86399) {
+        dys = trunc(dur / 86400);
+        dur = dur - (dys * 86400);
+      }
+      if (dur > 3599) {
+        hrs = trunc(dur / 3600);
+        dur = dur - (hrs * 3600);
+      }
+      if (dur > 59) {
+        mnts = trunc(dur / 60);
+        dur = dur - (mnts * 60);
+      }
+      char buffer[17];
+      sprintf(buffer, "%ud %02uh %02um %02us", dys, hrs, mnts, dur);
+      return {buffer};
+    icon: mdi:clock-start
+    update_interval: 30s
+  
+sensor:
+  - platform: uptime
+    id: uptime_s
+    update_interval: 30s
+  - platform: wifi_signal
+    name: ${upper_devicename} WiFi Signal
+    update_interval: 60s  
+
+  - platform: ina219
+    address: 0x40
+    i2c_id: bus_a
+    current:
+      name: ${upper_devicename} current
+      filters:
+        - multiply: 100
+    power:
+      name: ${upper_devicename} power
+      filters:
+        - multiply: 100
+      id: ${devicename}_spotreba
+    bus_voltage:
+      name: ${upper_devicename} voltage
+    shunt_voltage:
+      name: ${upper_devicename} voltage at resistor
+    max_voltage: 13V
+    max_current: 2.2A
+    update_interval: 10s    
+
+  - platform: total_daily_energy
+    name: ${upper_devicename} today's power consumption 
+    power_id: ${devicename}_spotreba
+    id: ${devicename}_dnesna_spotreba
+
+  - platform: template
+    name: ${upper_devicename} price for today
+    unit_of_measurement: "€"
+    lambda: |-
+      return id(${devicename}_dnesna_spotreba).state * 0.001 * 0.16 ;
+    update_interval: 60s
+    icon: mdi:currency-eur
+  
+#  - platform: xiaomi_hhccjcy01
+#    mac_address: 'C4:7C:8D:66:DA:81'
+#    temperature:
+#      name: "Bylinky teplota"
+#    moisture:
+#      name: "Bylinky vlhkosť"
+#    illuminance:
+#      name: "Bylinky svetlo"
+#    conductivity:
+#      name: "Bylinky hnojivo"
+#    battery_level:
+#      name: "Bylinky batéria"
+    
+switch:
+  - platform: restart
+    name: ${upper_devicename} restart
+
+esp32_camera:
+  external_clock:
+    pin: GPIO0
+    frequency: 20MHz
+  i2c_pins:
+    sda: GPIO26
+    scl: GPIO27
+  data_pins: [GPIO5, GPIO18, GPIO19, GPIO21, GPIO36, GPIO39, GPIO34, GPIO35]
+  vsync_pin: GPIO25
+  href_pin: GPIO23
+  pixel_clock_pin: GPIO22
+  power_down_pin: GPIO32
+  resolution: XGA
+  max_framerate: 1 fps
+  jpeg_quality: 10
+  name: ${upper_devicename}   
+  
+i2c:
+  sda: GPIO2
+  scl: GPIO13
+  scan: True
+  id: bus_a
+  
+output:
+  - platform: ledc
+    pin: GPIO14
+    id: led_output
+    channel: 2
+  - platform: ledc
+    pin: GPIO15
+    id: fan_output  
+    channel: 3
+    
+light:
+  - platform: monochromatic
+    output: led_output
+    name: ${upper_devicename} lights 
+    
+fan:
+  - platform: speed
+    output: fan_output
+    name: ${upper_devicename} ventilation  
+    speed:
+      low: 0.20
+      medium: 0.40
+      high: 0.60

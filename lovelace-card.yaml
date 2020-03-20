@@ -1,0 +1,193 @@
+elements:
+  - camera_image: camera.sklennik
+    camera_view: live
+    entity: camera.sklennik
+    style:
+      left: 45%
+      top: 55%
+      width: 130%
+    type: image
+  - image: /local/sklennik-card/background2.png
+    style:
+      left: 50%
+      top: 82%
+      width: 101%
+    tap_action: none
+    type: image
+  - color_thresholds:
+      - color: '#4dd2ff'
+        value: 18
+      - color: '#ffa31a'
+        value: 22
+      - color: '#ff1a1a'
+        value: 26
+    entities:
+      - sensor.bylinky_teplota_3
+    icon: 'mdi:home-thermometer-outline'
+    show:
+      icon: false
+      legend: false
+      name: false
+    style: |
+      :host {
+        left: 50%;
+        top: 85.5%;
+        width: 100% !important;
+        overflow: hidden;
+        height: 29%;
+        background: none  !important;
+        box-shadow: none !important;
+        //border: 1px solid red !important;
+        
+      }
+      .header {
+        font-size: 1vw;
+        position: absolute !important;
+        width: 25% !important;
+        padding: 0 !important;
+        right: 10% !important;
+        top: 15% !important;
+        color: white;
+
+      }
+      ha-card {
+        background: none  !important;
+        padding: 0 !important;
+        
+      }
+      .icon > ha-icon {
+        width:1.8vw !important;
+        height:1.8vw !important;
+        
+      }
+      .state__time{
+        font-size:0.9vw !important;
+        margin-top: 0.2vw;
+        font-weight: 300 !important;
+        opacity: 0.4 !important;
+      }
+      .states {
+        font-size: 0.5vw !important;
+        padding: 1vw 0vw 0vw 0vw  !important;
+        margin: auto !important;
+        position: absolute !important;
+        padding: 0 !important;
+        left: 2% !important;
+        top: 6% !important;
+        color: white;
+      }
+    type: 'custom:mini-graph-card'
+  - image: /local/sklennik-card/circle.png
+    style:
+      left: 22%
+      top: 76%
+      width: 14%
+    type: image
+  - image: /local/sklennik-card/water-percent.png
+    style:
+      left: 22%
+      top: 69%
+      width: 8%
+    type: image
+  - entity: sensor.bylinky_vlhost_cislo
+    style:
+      font-size: 1vw
+      font-weight: 500
+      left: 22%
+      top: 76.5%
+      color: white
+    type: state-label
+  - image: /local/sklennik-card/percent.png
+    style:
+      left: 22%
+      top: 83%
+      width: 11%
+    type: image
+  - image: /local/sklennik-card/circle.png
+    style:
+      left: 39%
+      top: 76%
+      width: 14%
+    type: image
+  - image: /local/sklennik-card/brightness-7.png
+    style:
+      left: 39%
+      top: 69%
+      width: 6%
+    type: image
+  - entity: sensor.bylinky_svetlo_cislo
+    style:
+      font-size: 1vw
+      font-weight: 500
+      left: 39%
+      top: 76.5%
+      color: white
+    type: state-label
+  - image: /local/sklennik-card/lx.png
+    style:
+      left: 39%
+      top: 83%
+      width: 11%
+    type: image
+  - image: /local/sklennik-card/circle.png
+    style:
+      left: 56%
+      top: 76%
+      width: 14%
+    type: image
+  - image: /local/sklennik-card/emoticon-poop.png
+    style:
+      left: 56%
+      top: 69%
+      width: 7%
+    type: image
+  - entity: sensor.bylinky_hnojivo_cislo
+    style:
+      font-size: 1vw
+      font-weight: 500
+      left: 56%
+      top: 76.5%
+      color: white
+    type: state-label
+  - image: /local/sklennik-card/uscm.png
+    style:
+      left: 56%
+      top: 83%
+      width: 11%
+    type: image
+  - image: /local/sklennik-card/circle.png
+    style:
+      left: 73%
+      top: 76%
+      width: 14%
+    type: image
+  - entity: light.sklennik_svetla
+    state_image:
+      'off': /local/sklennik-card/lightbulb-off.png
+      'on': /local/sklennik-card/lightbulb-on.png
+    style:
+      left: 73%
+      top: 75.5%
+      width: 9%
+    tap_action:
+      action: toggle
+    type: image
+  - image: /local/sklennik-card/circle.png
+    style:
+      left: 90%
+      top: 76%
+      width: 14%
+    type: image
+  - entity: fan.sklennik_vetranie
+    state_image:
+      'off': /local/sklennik-card/fan-off.png
+      'on': /local/sklennik-card/fan-on.png
+    style:
+      left: 90%
+      top: 76%
+      width: 9%
+    tap_action:
+      action: toggle
+    type: image
+image: /local/sklennik-card/transparent.png
+type: picture-elements
