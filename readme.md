@@ -1,9 +1,9 @@
-## Idea behind this
+## Idea behind this project
 <img src="./Photos/Greenhouse-render (1).png" width="400">
 
 Simple but functional indoor greenhouse, with intergalactic space design and smart capabilities, powered by ESPHome and HomeAssistant.
 
-We had one big pot with herbs in our kitchen, but in winter, there is not enough light to grow them at reasonable rate. So I came with idea to build some cover around it, and of course to make it smart because who would remember to water it anyaway right ? 
+We had one big pot with herbs in our kitchen, but in winter, there is not enough light to grow them at reasonable rate. So I came with idea to build some cover around it, and of course to make it smart, because who would remember to water it anyaway right ? 
 
 ## Design and build
 <img src="./Photos/Greenhouse-build (7).jpg" width="400">
@@ -43,3 +43,14 @@ Lovelace config is in lovelace-card.yaml file.
 <img src="./Photos/Lovelace-card-2.jpg" width="400">
 
 All files can be find [on my thingiverse.com/Luc3as](https://www.thingiverse.com/thing:4233190)
+
+
+
+### If You liked my work, You can buy me a coffee :)
+
+<a class="" target="_blank" href="https://www.buymeacoffee.com/luc3as"><img src="https://lukasporubcan.sk/images/buymeacoffee.png" alt="Buy Me A Coffee" style="max-width: 217px !important;"></a>
+
+### Or send some crypto
+
+<a class="" target="_blank" href="https://lukasporubcan.sk/donate"><img src="https://lukasporubcan.sk/images/donatebitcoin.png" alt="Donate Bitcoin" style="max-width: 217px !important;"></a>	
+				    			    			    							    			     			    	
