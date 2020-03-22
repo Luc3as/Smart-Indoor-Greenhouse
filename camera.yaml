@@ -1,0 +1,11 @@
+camera:
+  - platform: local_file
+    name: Greenhouse 48 hodín
+    file_path: /config/www/greenhouse-timelapse/gifs/last-48-hours.gif
+  - platform: local_file
+    name: Greenhouse týždeň
+    file_path: /config/www/greenhouse-timelapse/gifs/last-week.gif
+  - platform: local_file
+    name: Greenhouse týždeň
+    file_path: /config/www/greenhouse-timelapse/gifs/last-month.gif
+ 

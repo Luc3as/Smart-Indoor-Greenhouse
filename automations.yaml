@@ -1,0 +1,18 @@
+- id: '1584878306423'
+  alias: Make snapshot from greenhouse camera
+  description: ''
+  trigger:
+  - hours: '*'
+    minutes: '10'
+    platform: time_pattern
+  condition:
+  - condition: device
+    device_id: 5743f347838241d1aaf6188e7e0dd1b7
+    domain: light
+    entity_id: light.sklennik_svetla
+    type: is_on
+  action:
+  - data:
+      filename: /config/www/greenhouse-timelapse/{{now().strftime('%d-%m-%Y')}}_{{now().strftime('%H')}}.jpg
+    entity_id: camera.sklennik
+    service: camera.snapshot

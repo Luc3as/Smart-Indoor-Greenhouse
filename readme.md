@@ -42,6 +42,11 @@ Lovelace config is in lovelace-card.yaml file.
 
 <img src="./Photos/Lovelace-card-2.jpg" width="400">
 
+## TimeLapse videos
+I am making snapshots through HomeAssistant automation saving all files in local www folder, and then massage  these photos through NodeRed, which outputs gif files, and I am showing these gif files as local_file camera. All neccessary config files are included. 
+
+
+
 All files can be find [on my thingiverse.com/Luc3as](https://www.thingiverse.com/thing:4233190)
 
 
